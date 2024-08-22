@@ -121,7 +121,7 @@ fig1 = px.histogram(
     labels={
         'tempo': 'Tempo (BPM)'
     },
-    color='tempo'
+    color='count'
 )
 
 # Add mean and median lines
