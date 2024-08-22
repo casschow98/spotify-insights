@@ -120,10 +120,16 @@ fig1 = px.histogram(
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
-    },
-    color='tempo',  # Use 'tempo' as the color dimension
-    color_continuous_scale='Purples',  # Set the color scale to shades of purple
-    range_color=[tracks_df['tempo'].min(), tracks_df['tempo'].max()]
+    }
+)
+
+# Update the histogram with color based on bin values
+fig1.update_traces(
+    marker=dict(
+        color=tracks_df['tempo'],
+        colorscale='Purples',  # Set the color scale to shades of purple
+        colorbar=dict(title='Tempo')
+    )
 )
 
 # Add mean and median lines
