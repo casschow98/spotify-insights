@@ -6,4 +6,4 @@ google-auth==2.34.0
 google-auth-oauthlib
 numpy
 matplotlib
-plotly
+plotly_express
