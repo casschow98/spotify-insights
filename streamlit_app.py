@@ -13,8 +13,8 @@ import plotly.express as px
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
-    page_title='Spotify dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
+    page_title='Spotify Analysis',
+    page_icon='spotify_logo.jpg'
 )
 
 # Create API client.
@@ -145,7 +145,6 @@ fig2 = px.scatter(
     tracks_df,
     x='speechiness',
     y='instrumentalness',
-    title='Speechiness vs. Instrumentalness',
     labels={
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
@@ -179,7 +178,7 @@ with cols[1]:
         major_ratio = major_count // gcd
         minor_ratio = minor_count // gcd
         ratio_string = f"{major_ratio}:{minor_ratio}"
-    st.metric("Ratio of Tracks in Major Keys to Minor Keys" , ratio_string, delta=None, help=None, label_visibility="visible")
+    st.metric("Ratio of Major to Minor Key Songs" , ratio_string, delta=None, help=None, label_visibility="visible")
 
 with cols[2]:
     artist_counts = tracks_df['artists'].value_counts()
