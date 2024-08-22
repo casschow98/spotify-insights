@@ -1,6 +1,6 @@
 streamlit
 pandas
-db-types
+db-dtypes
 google-cloud-bigquery
 google-auth
 numpy
