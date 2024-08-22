@@ -120,16 +120,8 @@ fig1 = px.histogram(
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
-    }
-)
-
-# Update the histogram with color based on bin values
-fig1.update_traces(
-    marker=dict(
-        color=tracks_df['tempo'],
-        colorscale='Purples',  # Set the color scale to shades of purple
-        colorbar=dict(title='Tempo')
-    )
+    },
+    color='tempo'
 )
 
 # Add mean and median lines
@@ -174,11 +166,11 @@ st.header(f'Stats', divider='gray')
 
 cols = st.columns(3)
 
-with cols[1]:
+with cols[0]:
     count = len(tracks_df)
     st.metric("Total Tracks" , count, delta=None, help=None, label_visibility="visible")
 
-with cols[2]:
+with cols[1]:
     major_count = tracks_df[tracks_df['mode'] == 0].shape[0]
     minor_count = tracks_df[tracks_df['mode'] == 1].shape[0]
     if minor_count == 0:
@@ -190,7 +182,7 @@ with cols[2]:
         ratio_string = f"{major_ratio}:{minor_ratio}"
     st.metric("Ratio of Tracks in Major Keys to Minor Keys" , ratio_string, delta=None, help=None, label_visibility="visible")
 
-with cols[3]:
+with cols[2]:
     artist_counts = tracks_df['artist_name'].value_counts()
     top_artist = artist_counts.idxmax()
 
