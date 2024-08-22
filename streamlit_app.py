@@ -120,8 +120,7 @@ fig1 = px.histogram(
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
-    },
-    color_discrete_sequence=px.colors.qualitative.Pastel
+    }
 )
 
 # Add mean and median lines
@@ -183,7 +182,7 @@ with cols[1]:
     st.metric("Ratio of Tracks in Major Keys to Minor Keys" , ratio_string, delta=None, help=None, label_visibility="visible")
 
 with cols[2]:
-    artist_counts = tracks_df['artist_name'].value_counts()
+    artist_counts = tracks_df['artists'].value_counts()
     top_artist = artist_counts.idxmax()
 
     st.metric("Most Listened to", top_artist, delta=None, help=None, label_visibility="visible")
