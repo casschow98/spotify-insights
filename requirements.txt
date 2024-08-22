@@ -1,2 +1,6 @@
 streamlit
 pandas
+db-types
+google-cloud-bigquery
+numpy
+matplotlib
