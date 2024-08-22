@@ -108,41 +108,33 @@ st.dataframe(
 st.header(f'Tempo Distribution', divider='gray')
 
 ''
-# mean_tempo = tracks_df['tempo'].mean()
-# median_tempo = tracks_df['tempo'].median()
-# fig1, ax1 = plt.subplots()
-# ax1.hist(tracks_df['tempo'], bins=10, edgecolor='black')
-# # ax.set_title('Distribution of Tempo')
-# ax1.set_xlabel('Tempo')
-# ax1.set_ylabel('Frequency')
-
-# ax1.axvline(mean_tempo, color='r', linestyle='dashed', linewidth=1, label=f'Mean: {mean_tempo:.2f}')
-# ax1.axvline(median_tempo, color='g', linestyle='dashed', linewidth=1, label=f'Median: {median_tempo:.2f}')
-# ax1.legend()
-
-# # Display the plot in Streamlit
-# st.pyplot(fig1)
-
-# st.write(f"**Mean Tempo:** {mean_tempo:.2f}")
-# st.write(f"**Median Tempo:** {median_tempo:.2f}")
-
 
 # Calculate mean and median for annotation
 mean_tempo = tracks_df['tempo'].mean()
 median_tempo = tracks_df['tempo'].median()
 
 # Create a histogram using Plotly
-fig1 = px.histogram(tracks_df, x='tempo', nbins=10, labels={'tempo': 'Tempo'}, title='Distribution of Tempo')
+fig1 = px.histogram(
+    tracks_df,
+    x='tempo',
+    nbins=10,
+    labels={
+        'tempo': 'Tempo (BPM)'
+    },
+    color='tempo',  # Use 'tempo' as the color dimension
+    color_continuous_scale='Purples',  # Set the color scale to shades of purple
+    range_color=[tracks_df['tempo'].min(), tracks_df['tempo'].max()]
+)
 
 # Add mean and median lines
-fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}')
-fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}')
+fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}', annotation_position='top right')
+fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
 
 # Show the plot in Streamlit
 st.plotly_chart(fig1)
 
-st.write(f"**Mean Tempo:** {mean_tempo:.2f}")
-st.write(f"**Median Tempo:** {median_tempo:.2f}")
+st.write(f"**Mean Tempo:** {mean_tempo:.2f} BPM")
+st.write(f"**Median Tempo:** {median_tempo:.2f} BPM")
 
 ''
 ''
@@ -151,13 +143,20 @@ st.header('Speechiness vs. Instrumentalness')
 
 ''
 
-fig2, ax2 = plt.subplots()
-ax2.scatter(tracks_df['speechiness'], tracks_df['instrumentalness'], c='blue', label='Tracks')
-ax2.set_xlabel('Speechiness')
-ax2.set_ylabel('Instrumentalness')
-ax2.legend()
+# Create a scatter plot using Plotly
+fig2 = px.scatter(
+    tracks_df,
+    x='speechiness',
+    y='instrumentalness',
+    title='Speechiness vs. Instrumentalness',
+    labels={
+        'speechiness': 'Speechiness',
+        'instrumentalness': 'Instrumentalness'
+    }
+)
 
-st.pyplot(fig2)
+# Show the plot in Streamlit
+st.plotly_chart(fig2)
 
 
 ''
