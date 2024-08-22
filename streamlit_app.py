@@ -37,7 +37,7 @@ def run_query(query):
     df = client.query(query).to_dataframe()
     return df
 
-summary_df = run_query("SELECT * FROM famous-muse-426921-s5.spotify_cchow_dataset.spotify_summary")
+summary_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_dataset.spotify_summary`")
 tracks_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_dataset.spotify_cchow_table`")
 
 # -----------------------------------------------------------------------------
