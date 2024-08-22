@@ -2,6 +2,7 @@ streamlit
 pandas
 db-dtypes
 google-cloud-bigquery
-google-auth
+google-auth==2.34.0
+google-auth-oauthlib
 numpy
 matplotlib
