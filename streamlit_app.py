@@ -7,7 +7,7 @@ from google.cloud import bigquery
 import db_dtypes
 import matplotlib.pyplot as plt
 import numpy as np
-
+import plotly.express as px
 
 
 
@@ -90,6 +90,7 @@ st.header('Top Tracks', divider='gray')
 
 st.dataframe(
     summary_df,
+    width=1000,
     column_order=('Row','track_name','artists','times_played','spotify_url'),
     column_config={
         "Row": "Rank",
@@ -107,24 +108,41 @@ st.dataframe(
 st.header(f'Tempo Distribution', divider='gray')
 
 ''
+# mean_tempo = tracks_df['tempo'].mean()
+# median_tempo = tracks_df['tempo'].median()
+# fig1, ax1 = plt.subplots()
+# ax1.hist(tracks_df['tempo'], bins=10, edgecolor='black')
+# # ax.set_title('Distribution of Tempo')
+# ax1.set_xlabel('Tempo')
+# ax1.set_ylabel('Frequency')
+
+# ax1.axvline(mean_tempo, color='r', linestyle='dashed', linewidth=1, label=f'Mean: {mean_tempo:.2f}')
+# ax1.axvline(median_tempo, color='g', linestyle='dashed', linewidth=1, label=f'Median: {median_tempo:.2f}')
+# ax1.legend()
+
+# # Display the plot in Streamlit
+# st.pyplot(fig1)
+
+# st.write(f"**Mean Tempo:** {mean_tempo:.2f}")
+# st.write(f"**Median Tempo:** {median_tempo:.2f}")
+
+
+# Calculate mean and median for annotation
 mean_tempo = tracks_df['tempo'].mean()
 median_tempo = tracks_df['tempo'].median()
-fig1, ax1 = plt.subplots()
-ax1.hist(tracks_df['tempo'], bins=10, edgecolor='black')
-# ax.set_title('Distribution of Tempo')
-ax1.set_xlabel('Tempo')
-ax1.set_ylabel('Frequency')
 
-ax1.axvline(mean_tempo, color='r', linestyle='dashed', linewidth=1, label=f'Mean: {mean_tempo:.2f}')
-ax1.axvline(median_tempo, color='g', linestyle='dashed', linewidth=1, label=f'Median: {median_tempo:.2f}')
-ax1.legend()
+# Create a histogram using Plotly
+fig1 = px.histogram(tracks_df, x='tempo', nbins=10, labels={'tempo': 'Tempo'}, title='Distribution of Tempo')
 
-# Display the plot in Streamlit
-st.pyplot(fig1)
+# Add mean and median lines
+fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}')
+fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}')
+
+# Show the plot in Streamlit
+st.plotly_chart(fig1)
 
 st.write(f"**Mean Tempo:** {mean_tempo:.2f}")
 st.write(f"**Median Tempo:** {median_tempo:.2f}")
-
 
 ''
 ''
@@ -165,7 +183,7 @@ with cols[2]:
         major_ratio = major_count // gcd
         minor_ratio = minor_count // gcd
         ratio_string = f"{major_ratio}:{minor_ratio}"
-    st.metric("Ratio of Tracks in Major Keys to Minor Keys" , ratio, delta=None, help=None, label_visibility="visible")
+    st.metric("Ratio of Tracks in Major Keys to Minor Keys" , ratio_string, delta=None, help=None, label_visibility="visible")
 
 with cols[3]:
     artist_counts = tracks_df['artist_name'].value_counts()
