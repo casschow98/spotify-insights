@@ -2,5 +2,6 @@ streamlit
 pandas
 db-types
 google-cloud-bigquery
+google-auth
 numpy
 matplotlib
