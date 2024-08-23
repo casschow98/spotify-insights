@@ -120,7 +120,7 @@ median_tempo = tracks_df['tempo'].median()
 fig1 = px.histogram(
     tracks_df,
     x='tempo',
-    color_discrete_sequence=['#7c73e6'],
+    # color_discrete_sequence=['#7c73e6'],
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
@@ -132,7 +132,7 @@ fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_tex
 fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
 
 # Show the plot in Streamlit
-st.plotly_chart(fig1)
+st.plotly_chart(fig1,theme=None)
 
 st.write(f"**Mean Tempo:** {mean_tempo:.2f} BPM")
 st.write(f"**Median Tempo:** {median_tempo:.2f} BPM")
@@ -153,11 +153,11 @@ fig2 = px.scatter(
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
     },
-    color_discrete_sequence=['#7c73e6']
+    # color_discrete_sequence=['#7c73e6']
 )
 
 # Show the plot in Streamlit
-st.plotly_chart(fig2)
+st.plotly_chart(fig2,theme=None)
 
 
 ''
@@ -214,6 +214,6 @@ fig3 = px.bar(
     height=500
 )
 
-fig3.update_traces(marker_color=["#CF9FFF", "#7FFFOO", "#F99DBC"])
+# fig3.update_traces(marker_color=["#CF9FFF", "#7FFFOO", "#F99DBC"])
 
-st.plotly_chart(fig3)
+st.plotly_chart(fig3,theme=None)
