@@ -45,9 +45,12 @@ tracks_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_datase
 
 # Set the title that appears at the top of the page.
 st.markdown('''
-<img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" style="width:40px; vertical-align: middle;"> Spotify Dashboard
-
-This is an analysis of my Spotify listening history as of August 2024. These insights are an analysis of various elements of the music I listen to.
+<h1 style="font-size: 48px; display: flex; align-items: center;">
+    <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" style="width:50px; margin-right: 10px;">
+    Spotify Analysis
+</h1>
+            
+<p>This is an analysis of my Spotify listening history as of August 2024. These insights are an analysis of various elements of the music I listen to.</p>
 ''', unsafe_allow_html=True)
 
 # Add some spacing
