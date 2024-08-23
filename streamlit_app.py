@@ -198,7 +198,7 @@ st.header(f'Top 10 Audio Features', divider='gray')
 
 ''
 
-af_df = tracks_df['track_name','danceability','energy','valence','tempo',]
+af_df = tracks_df[['track_name','danceability','energy','valence','tempo']]
 af_df.set_index('track_name', inplace=True)
 st.bar_chart(af_df, height=500)
 
