@@ -123,7 +123,8 @@ fig1 = px.histogram(
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
-    }
+    },
+    color=["#CF9FFF"]
 )
 
 # Add mean and median lines
@@ -151,7 +152,8 @@ fig2 = px.scatter(
     labels={
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
-    }
+    },
+    color=["#CF9FFF"]
 )
 
 # Show the plot in Streamlit
@@ -200,5 +202,5 @@ st.header(f'Top 10 Audio Features', divider='gray')
 
 af_df = summary_df[['track_name','danceability','energy','valence']]
 af_df.set_index('track_name', inplace=True)
-st.bar_chart(af_df, height=500)
+st.bar_chart(af_df, height=500, color=["#CF9FFF","#7FFFOO","#F99DBC"])
 
