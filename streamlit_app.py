@@ -202,11 +202,18 @@ st.header(f'Top 10 Audio Features', divider='gray')
 
 af_df = summary_df[['track_name','danceability','energy','valence']]
 af_df.set_index('track_name', inplace=True)
-st.bar_chart(
-    af_df,
-    x="track_name",
-    y=["danceability","energy","valence"],
-    height=500,
-    color=["#CF9FFF","#7FFFOO","#F99DBC"]
+
+fig3 = px.bar(
+    af_df.reset_index(),
+    x='track_name',
+    y=['danceability', 'energy', 'valence'],
+    labels={
+        'value': 'Score',
+        'track_name': 'Track Name'
+    },
+    height=500
 )
 
+fig3.update_traces(marker_color=["#CF9FFF", "#7FFFOO", "#F99DBC"])
+
+st.plotly_chart(fig3)
