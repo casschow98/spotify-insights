@@ -8,6 +8,10 @@ import db_dtypes
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
+import plotly.io as pio
+
+pio.templates.default = "plotly"
+
 
 
 
