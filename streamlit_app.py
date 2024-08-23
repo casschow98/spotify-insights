@@ -120,11 +120,11 @@ median_tempo = tracks_df['tempo'].median()
 fig1 = px.histogram(
     tracks_df,
     x='tempo',
+    color_discrete_sequence=['#7c73e6'],
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
-    },
-    color_discrete_sequence=["purple"]
+    }
 )
 
 # Add mean and median lines
@@ -153,7 +153,7 @@ fig2 = px.scatter(
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
     },
-    color_discrete_sequence=["purple"]
+    color_discrete_sequence=['#7c73e6']
 )
 
 # Show the plot in Streamlit
