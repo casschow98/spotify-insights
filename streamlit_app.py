@@ -13,7 +13,7 @@ import plotly.express as px
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
-    page_title='Spotify Analysis',
+    page_title='Spotify Insights',
     page_icon='https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png'
 )
 
@@ -47,7 +47,7 @@ tracks_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_datase
 st.markdown('''
 <h1 style="font-size: 48px; display: flex; align-items: center;">
     <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" style="width:50px; margin-right: 10px;">
-    Spotify Analysis
+    Spotify Insights
 </h1>
             
 <p>This is an analysis of my Spotify listening history as of August 2024. These insights are an analysis of various elements of the music I listen to.</p>
@@ -198,7 +198,7 @@ st.header(f'Top 10 Audio Features', divider='gray')
 
 ''
 
-af_df = tracks_df[['track_name','danceability','energy','valence','tempo']]
+af_df = summary_df[['track_name','danceability','energy','valence']]
 af_df.set_index('track_name', inplace=True)
 st.bar_chart(af_df, height=500)
 
