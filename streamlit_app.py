@@ -14,7 +14,7 @@ import plotly.express as px
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='Spotify Analysis',
-    page_icon='spotify_logo.jpg'
+    page_icon='https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png'
 )
 
 # Create API client.
@@ -45,7 +45,7 @@ tracks_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_datase
 
 # Set the title that appears at the top of the page.
 '''
-# :earth_americas: Spotify dashboard
+# ![Spotify Logo](https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png) Spotify Dashboard
 
 This is an analysis of my Spotify listening history as of August 2024. These insights are an analysis of various elements of the music I listen to.
 '''
@@ -185,3 +185,17 @@ with cols[2]:
     top_artist = artist_counts.idxmax()
 
     st.metric("Most Listened to", top_artist, delta=None, help=None, label_visibility="visible")
+
+
+
+''
+''
+
+st.header(f'Top 10 Audio Features', divider='gray')
+
+''
+
+af_df = tracks_df['track_name','danceability','energy','valence','tempo',]
+af_df.set_index('track_name', inplace=True)
+st.bar_chart(af_df, height=500)
+
