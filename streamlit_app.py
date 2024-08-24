@@ -123,7 +123,7 @@ with tabs[1]:
     st.dataframe(
         rp_df,
         width=1000,
-        column_order=('track_name','artists','played_at','track_duration','spotify_url'),
+        column_order=('track_name','artists','pt_dt','track_duration','spotify_url'),
         column_config={
             "track_name": "Name",
             "artists": "Artists",
