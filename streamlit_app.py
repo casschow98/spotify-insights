@@ -126,6 +126,11 @@ fig1 = px.histogram(
     }
 )
 
+fig1.update_layout(
+    plot_bgcolor='rgba(14, 17, 23, 1)',
+    paper_bgcolor='rgba(14, 17, 23, 1)',
+)
+
 # Add mean and median lines
 fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}', annotation_position='top right')
 fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
@@ -152,6 +157,11 @@ fig2 = px.scatter(
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
     }
+)
+
+fig2.update_layout(
+    plot_bgcolor='rgba(14, 17, 23, 1)',
+    paper_bgcolor='rgba(14, 17, 23, 1)',
 )
 
 # Show the plot in Streamlit
@@ -210,5 +220,9 @@ fig3 = px.bar(
     height=500
 )
 
+fig3.update_layout(
+    plot_bgcolor='rgba(14, 17, 23, 1)',
+    paper_bgcolor='rgba(14, 17, 23, 1)',
+)
 
 st.plotly_chart(fig3,theme=None)
