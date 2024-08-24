@@ -127,7 +127,7 @@ with tabs[1]:
         column_config={
             "track_name": "Name",
             "artists": "Artists",
-            "pt_dt": "Played At",
+            "pt_dt": "Played At (PT)",
             "track_duration": "Length",
             "spotify_url": st.column_config.LinkColumn("Spotify URL")
         },
@@ -162,7 +162,7 @@ fig1.update_layout(
 
 # Add mean and median lines
 fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}', annotation_position='top right')
-fig1.add_vline(x=median_tempo, line=dict(color='green', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
+fig1.add_vline(x=median_tempo, line=dict(color='#39FF14', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
 
 # Show the plot in Streamlit
 st.plotly_chart(fig1,theme=None)
@@ -217,7 +217,7 @@ with cols[1]:
         pct_str = f"100%"
     else:
         minor_pct = minor_count/count*100
-        pct_str = f"{minor_pct:.2f}%"
+        pct_str = f"{minor_pct:.1f}%"
     st.metric("Songs in Minor Key" , pct_str, delta=None, help=None, label_visibility="visible")
 
 artist_counts = tracks_df['artists'].value_counts()
