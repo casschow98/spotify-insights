@@ -118,7 +118,7 @@ with tabs[1]:
     
     rp_df['played_at'] = pd.to_datetime(rp_df['played_at'], utc=True)
     rp_df['pt_dt'] = rp_df['played_at'].dt.tz_convert('America/Los_Angeles')
-    rp_df['pt_dt'] = rp_df['pt_timestamp'].dt.strftime('%b %d, %Y %I:%M %p')
+    rp_df['pt_dt'] = rp_df['pt_dt'].dt.strftime('%b %d, %Y %I:%M %p')
 
     st.dataframe(
         rp_df,
