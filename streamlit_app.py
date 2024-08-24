@@ -228,6 +228,6 @@ fig3.update_layout(
     )
 )
 
-fig3.update_xaxis(automargin=True)
+fig3.update_xaxes(automargin=True)
 
 st.plotly_chart(fig3,theme=None)
