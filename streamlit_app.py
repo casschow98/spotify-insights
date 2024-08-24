@@ -175,7 +175,7 @@ st.header(f'Stats', divider='gray')
 
 ''
 
-cols = st.columns(3)
+cols = st.columns(2)
 
 with cols[0]:
     count = len(tracks_df)
@@ -191,11 +191,10 @@ with cols[1]:
         pct_str = f"{minor_pct:.2f}%"
     st.metric("Songs in Minor Key" , pct_str, delta=None, help=None, label_visibility="visible")
 
-with cols[2]:
-    artist_counts = tracks_df['artists'].value_counts()
-    top_artist = artist_counts.idxmax()
+artist_counts = tracks_df['artists'].value_counts()
+top_artist = artist_counts.idxmax()
 
-    st.metric("Most Listened to", top_artist, delta=None, help=None, label_visibility="visible")
+st.metric("Most Listened to", top_artist, delta=None, help=None, label_visibility="visible")
 
 
 
@@ -223,6 +222,11 @@ fig3 = px.bar(
 fig3.update_layout(
     plot_bgcolor='rgba(14, 17, 23, 1)',
     paper_bgcolor='rgba(14, 17, 23, 1)',
+    xaxis=dict(
+        tickangle=-45,  # Angle of x-axis labels
+        title_standoff=25  # Space between x-axis title and labels
+    ),
+    margin=dict(t=40, b=100, l=50, r=20)
 )
 
 st.plotly_chart(fig3,theme=None)
