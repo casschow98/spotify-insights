@@ -8,6 +8,7 @@ import db_dtypes
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
+import pytz
 
 
 
@@ -111,8 +112,14 @@ with tabs[0]:
 
 with tabs[1]:
     st.header("Recently Played")
+
     sorted_df = tracks_df.sort_values(by="played_at", ascending=False)
     rp_df = sorted_df.head(20)
+    
+    rp_df['played_at'] = pd.to_datetime(rp_df['played_at'], utc=True)
+    rp_df['pt_dt'] = rp_df['played_at'].dt.tz_convert('America/Los_Angeles')
+    rp_df['pt_dt'] = rp_df['pt_timestamp'].dt.strftime('%b %d, %Y %I:%M %p')
+
     st.dataframe(
         rp_df,
         width=1000,
@@ -120,7 +127,7 @@ with tabs[1]:
         column_config={
             "track_name": "Name",
             "artists": "Artists",
-            "played_at": "Played At (UTC)",
+            "pt_dt": "Played At",
             "track_duration": "Length",
             "spotify_url": st.column_config.LinkColumn("Spotify URL")
         },
