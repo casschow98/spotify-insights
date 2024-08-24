@@ -87,23 +87,45 @@ st.markdown('''
 #     & (from_year <= gdp_df['Year'])
 # ]
 
-st.header('Top Tracks', divider='gray')
+st.header('My Listening History', divider='gray')
+
 
 ''
 
-st.dataframe(
-    summary_df,
-    width=1000,
-    column_order=('Row','track_name','artists','times_played','spotify_url'),
-    column_config={
-        "Row": "Rank",
-        "track_name": "Name",
-        "artists": "Artists",
-        "times_played": "Times Played",
-        "spotify_url": st.column_config.LinkColumn("Spotify URL")
-    },
-    hide_index=True
-)
+tabs = st.tabs(["Top Tracks", "Recently Played"])
+
+# Display Top Tracks
+with tabs[0]:
+    st.header("Top Tracks")
+    st.dataframe(
+        summary_df,
+        width=1000,
+        column_order=('Row','track_name','artists','times_played','spotify_url'),
+        column_config={
+            "Row": "Rank",
+            "track_name": "Name",
+            "artists": "Artists",
+            "times_played": "Times Played",
+            "spotify_url": st.column_config.LinkColumn("Spotify URL")
+        },
+        hide_index=True
+    )
+
+with tabs[1]:
+    st.header("Recently Played")
+    sorted_df = tracks_df.sort_values(by="played_at", ascending=False)
+    rp_df = sorted_df.head(20)
+    st.dataframe(
+        rp_df,
+        width=1000,
+        column_order=('track_name','artists','played_at','track_duration','spotify_url'),
+        column_config={
+            "track_name": "Name",
+            "artists": "Artists",
+            "track_duration": "Length",
+            "spotify_url": st.column_config.LinkColumn("Spotify URL")
+        }
+    )
 
 ''
 ''
