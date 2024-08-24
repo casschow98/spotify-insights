@@ -8,10 +8,6 @@ import db_dtypes
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
-import plotly.io as pio
-
-pio.templates.default = "plotly"
-
 
 
 
@@ -124,7 +120,6 @@ median_tempo = tracks_df['tempo'].median()
 fig1 = px.histogram(
     tracks_df,
     x='tempo',
-    # color_discrete_sequence=['#7c73e6'],
     nbins=10,
     labels={
         'tempo': 'Tempo (BPM)'
@@ -156,8 +151,7 @@ fig2 = px.scatter(
     labels={
         'speechiness': 'Speechiness',
         'instrumentalness': 'Instrumentalness'
-    },
-    # color_discrete_sequence=['#7c73e6']
+    }
 )
 
 # Show the plot in Streamlit
@@ -175,19 +169,17 @@ cols = st.columns(3)
 
 with cols[0]:
     count = len(tracks_df)
-    st.metric("Total Tracks" , count, delta=None, help=None, label_visibility="visible")
+    st.metric("Total Songs Listened" , count, delta=None, help=None, label_visibility="visible")
 
 with cols[1]:
     major_count = tracks_df[tracks_df['mode'] == 0].shape[0]
     minor_count = tracks_df[tracks_df['mode'] == 1].shape[0]
-    if minor_count == 0:
-        ratio = float('inf')  # Avoid division by zero
+    if major_count == 0:
+        pct_str = f"100%"
     else:
-        gcd = math.gcd(major_count, minor_count)
-        major_ratio = major_count // gcd
-        minor_ratio = minor_count // gcd
-        ratio_string = f"{major_ratio}:{minor_ratio}"
-    st.metric("Ratio of Major to Minor Key Songs" , ratio_string, delta=None, help=None, label_visibility="visible")
+        minor_pct = minor_count/major_count*100
+        pct_str = f"{minor_pct:.2f}%"
+    st.metric("Songs in Minor Key" , pct_str, delta=None, help=None, label_visibility="visible")
 
 with cols[2]:
     artist_counts = tracks_df['artists'].value_counts()
@@ -218,6 +210,5 @@ fig3 = px.bar(
     height=500
 )
 
-# fig3.update_traces(marker_color=["#CF9FFF", "#7FFFOO", "#F99DBC"])
 
 st.plotly_chart(fig3,theme=None)
