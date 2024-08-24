@@ -124,7 +124,8 @@ with tabs[1]:
             "artists": "Artists",
             "track_duration": "Length",
             "spotify_url": st.column_config.LinkColumn("Spotify URL")
-        }
+        },
+        hide_index=True
     )
 
 ''
