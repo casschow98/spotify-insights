@@ -187,7 +187,7 @@ with cols[1]:
     if major_count == 0:
         pct_str = f"100%"
     else:
-        minor_pct = minor_count/major_count*100
+        minor_pct = minor_count/count*100
         pct_str = f"{minor_pct:.2f}%"
     st.metric("Songs in Minor Key" , pct_str, delta=None, help=None, label_visibility="visible")
 
