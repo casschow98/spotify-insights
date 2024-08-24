@@ -226,7 +226,7 @@ fig3.update_layout(
         tickangle=25,  # Angle of x-axis labels
         title_standoff=25  # Space between x-axis title and labels
     ),
-    margin=dict(t=40, b=100, l=50, r=20)
+    automargin=True
 )
 
 st.plotly_chart(fig3,theme=None)
