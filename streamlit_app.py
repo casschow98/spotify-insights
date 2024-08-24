@@ -87,8 +87,6 @@ st.markdown('''
 #     & (from_year <= gdp_df['Year'])
 # ]
 
-st.header('My Listening History', divider='gray')
-
 
 ''
 
@@ -100,9 +98,9 @@ with tabs[0]:
     st.dataframe(
         summary_df,
         width=1000,
-        column_order=('Row','track_name','artists','times_played','spotify_url'),
+        column_order=('rank','track_name','artists','times_played','spotify_url'),
         column_config={
-            "Row": "Rank",
+            "rank": "Rank",
             "track_name": "Name",
             "artists": "Artists",
             "times_played": "Times Played",
@@ -122,6 +120,7 @@ with tabs[1]:
         column_config={
             "track_name": "Name",
             "artists": "Artists",
+            "played_at": "Played At (UTC)",
             "track_duration": "Length",
             "spotify_url": st.column_config.LinkColumn("Spotify URL")
         },
