@@ -223,7 +223,7 @@ fig3.update_layout(
     plot_bgcolor='rgba(14, 17, 23, 1)',
     paper_bgcolor='rgba(14, 17, 23, 1)',
     xaxis=dict(
-        tickangle=-45,  # Angle of x-axis labels
+        tickangle=25,  # Angle of x-axis labels
         title_standoff=25  # Space between x-axis title and labels
     ),
     margin=dict(t=40, b=100, l=50, r=20)
