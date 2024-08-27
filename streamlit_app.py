@@ -213,9 +213,13 @@ fig2.add_annotation(
     xref='paper',
     yref='paper',
 <<<<<<< HEAD
+<<<<<<< HEAD
     text=f"R&sup2;: {r_squared:.2f}",
 =======
     text=f"R<sup>2</sup>: {r_squared:.2f}",
+>>>>>>> macbook
+=======
+    text=f"R^{2}$: {r_squared:.2f}",
 >>>>>>> macbook
     showarrow=False,
     font=dict(size=12)
