@@ -182,7 +182,7 @@ st.header('Speechiness vs. Instrumentalness')
 m, b = np.polyfit(tracks_df['speechiness'], tracks_df['instrumentalness'], 1)
 tracks_df['y_pred'] = m * tracks_df['speechiness'] + b
 
-r_squared = r2_score(tracks_df['instrumentalness'], tracks_df['instrumentalness'])
+r_squared = r2_score(tracks_df['instrumentalness'], tracks_df['y_pred'])
 
 
 fig2 = px.scatter(
@@ -209,7 +209,7 @@ fig2.add_annotation(
 
 fig2.add_annotation(
     x=0,
-    y=-0.35,
+    y=-0.3,
     xref='paper',
     yref='paper',
     text=f"R-squared: {r_squared:.2f}",
