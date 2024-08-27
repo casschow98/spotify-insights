@@ -195,7 +195,7 @@ fig2 = px.scatter(
     }
 )
 
-fig2.add_traces(px.line(tracks_df, x='x', y='y_pred').data) 
+fig2.add_traces(px.line(tracks_df, x='speechiness', y='y_pred').data) 
 
 fig2.add_annotation(
     x=0.5,
