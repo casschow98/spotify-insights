@@ -198,8 +198,8 @@ fig2 = px.scatter(
 fig2.add_traces(px.line(tracks_df, x='speechiness', y='y_pred').data) 
 
 fig2.add_annotation(
-    x=0.5,
-    y=-0.15,
+    x=0,
+    y=-0.25,
     xref='paper',
     yref='paper',
     text=f"Slope: {m:.2f}",
@@ -208,8 +208,8 @@ fig2.add_annotation(
 )
 
 fig2.add_annotation(
-    x=0.5,
-    y=-0.25,
+    x=0,
+    y=-0.35,
     xref='paper',
     yref='paper',
     text=f"R-squared: {r_squared:.2f}",
