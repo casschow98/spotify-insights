@@ -119,7 +119,7 @@ with tabs[1]:
     
     rp_df['played_at'] = pd.to_datetime(rp_df['played_at'], utc=True)
     rp_df['pt_dt'] = rp_df['played_at'].dt.tz_convert('America/Los_Angeles')
-    rp_df['pt_dt'] = rp_df['pt_timestamp'].dt.strftime('%b %d, %Y %I:%M %p')
+    rp_df['pt_dt'] = rp_df['pt_dt'].dt.strftime('%b %d, %Y %I:%M %p')
 
     st.dataframe(
         rp_df,
@@ -212,7 +212,7 @@ fig2.add_annotation(
     y=-0.3,
     xref='paper',
     yref='paper',
-    text=f"R<sup>2</sup>: {r_squared:.2f}",
+    text=f"R^{2}$: {r_squared:.2f}",
     showarrow=False,
     font=dict(size=12)
 )
@@ -220,7 +220,7 @@ fig2.add_annotation(
 fig2.update_layout(
     plot_bgcolor='rgba(14, 17, 23, 1)',
     paper_bgcolor='rgba(14, 17, 23, 1)',
-    margin=dict(t=60, b=100)
+    margin=dict(b=100)
 )
 
 # Show the plot in Streamlit
