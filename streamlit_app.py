@@ -7,6 +7,9 @@ from google.cloud import bigquery
 import db_dtypes
 import plotly.express as px
 import pytz
+import numpy as np
+from sklearn.metrics import r2_score
+
 
 
 
@@ -176,6 +179,12 @@ st.header('Speechiness vs. Instrumentalness')
 ''
 
 # Create a scatter plot using Plotly
+m, b = np.polyfit(tracks_df['speechiness'], tracks_df['instrumentalness'], 1)
+tracks_df['y_pred'] = m * tracks_df['speechiness'] + b
+
+r_squared = r2_score(tracks_df['instrumentalness'], tracks_df['instrumentalness'])
+
+
 fig2 = px.scatter(
     tracks_df,
     x='speechiness',
@@ -186,9 +195,32 @@ fig2 = px.scatter(
     }
 )
 
+fig2.add_traces(px.line(tracks_df, x='x', y='y_pred').data) 
+
+fig2.add_annotation(
+    x=0.5,
+    y=-0.15,
+    xref='paper',
+    yref='paper',
+    text=f"Slope: {m:.2f}",
+    showarrow=False,
+    font=dict(size=12)
+)
+
+fig2.add_annotation(
+    x=0.5,
+    y=-0.25,
+    xref='paper',
+    yref='paper',
+    text=f"R-squared: {r_squared:.2f}",
+    showarrow=False,
+    font=dict(size=12)
+)
+
 fig2.update_layout(
     plot_bgcolor='rgba(14, 17, 23, 1)',
     paper_bgcolor='rgba(14, 17, 23, 1)',
+    margin=dict(t=60, b=100)
 )
 
 # Show the plot in Streamlit
