@@ -212,7 +212,7 @@ fig2.add_annotation(
     y=-0.3,
     xref='paper',
     yref='paper',
-    text=f"R-squared: {r_squared:.2f}",
+    text=f"R<sup>2</sup>: {r_squared:.2f}",
     showarrow=False,
     font=dict(size=12)
 )
