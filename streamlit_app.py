@@ -5,8 +5,6 @@ from pathlib import Path
 from google.oauth2 import service_account
 from google.cloud import bigquery
 import db_dtypes
-import matplotlib.pyplot as plt
-import numpy as np
 import plotly.express as px
 import pytz
 
