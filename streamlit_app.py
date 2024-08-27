@@ -212,7 +212,7 @@ fig2.add_annotation(
     y=-0.3,
     xref='paper',
     yref='paper',
-    text=f"R-squared: {r_squared:.2f}",
+    text=f"R&sup2;: {r_squared:.2f}",
     showarrow=False,
     font=dict(size=12)
 )
@@ -220,7 +220,7 @@ fig2.add_annotation(
 fig2.update_layout(
     plot_bgcolor='rgba(14, 17, 23, 1)',
     paper_bgcolor='rgba(14, 17, 23, 1)',
-    margin=dict(t=60, b=100)
+    margin=dict(b=100)
 )
 
 # Show the plot in Streamlit
