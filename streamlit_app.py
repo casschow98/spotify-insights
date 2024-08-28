@@ -52,7 +52,7 @@ st.markdown('''
     Spotify Insights
 </h1>
             
-<p>This is an analysis of my Spotify listening history as of August 2024. These insights are an analysis of various elements of the music I listen to.</p>
+<p>Welcome to my spotify data pipeline project! See below the results from analyses of my personal listening history as of August 2024. This data was obtained through the Spotify Web API.</p>
 ''', unsafe_allow_html=True)
 
 # Add some spacing
@@ -212,7 +212,7 @@ fig2.add_annotation(
     y=-0.3,
     xref='paper',
     yref='paper',
-    text=f"R^{2}$: {r_squared:.2f}",
+    text=f"R-squared: {r_squared:.2f}",
     showarrow=False,
     font=dict(size=12)
 )
