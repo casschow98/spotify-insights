@@ -238,7 +238,7 @@ cols = st.columns(2)
 
 with cols[0]:
     count = len(tracks_df)
-    st.metric("Total Songs Listened" , count, delta=None, help=None, label_visibility="visible")
+    st.metric("Total Listens" , count, delta=None, help=None, label_visibility="visible")
 
 with cols[1]:
     major_count = tracks_df[tracks_df['mode'] == 0].shape[0]
