@@ -26,16 +26,13 @@ credentials = service_account.Credentials.from_service_account_info(
 client = bigquery.Client(credentials=credentials)
 
 # -----------------------------------------------------------------------------
-# Declare some useful functions.
+# Declare functions.
 
 # Perform query.
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
+# Uses st.cache_data to only rerun after time in seconds.
 @st.cache_data(ttl=600)
 def run_query(query):
     query_job = client.query(query)
-    # rows_raw = query_job.result()
-    # Convert to list of dicts. Required for st.cache_data to hash the return value.
-    # rows = [dict(row) for row in rows_raw]
     df = client.query(query).to_dataframe()
     return df
 
@@ -43,7 +40,7 @@ summary_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_datas
 tracks_df = run_query("SELECT * FROM `famous-muse-426921-s5.spotify_cchow_dataset.spotify_cchow_table`")
 
 # -----------------------------------------------------------------------------
-# Draw the actual page
+# Draw the page
 
 # Set the title that appears at the top of the page.
 st.markdown('''
@@ -55,7 +52,6 @@ st.markdown('''
 <p>Welcome to my Spotify data pipeline project! See below the results from analyses of my personal listening history as of August 2024. This data was obtained through the Spotify Web API.</p>
 ''', unsafe_allow_html=True)
 
-# Add some spacing
 ''
 ''
 
@@ -111,6 +107,7 @@ with tabs[0]:
         hide_index=True
     )
 
+# Display 20 recently played tracks with custom column headers and played_at time converted to Pacific Time from UTC
 with tabs[1]:
     st.header("Recently Played")
 
@@ -146,7 +143,7 @@ st.header(f'Tempo Distribution', divider='gray')
 mean_tempo = tracks_df['tempo'].mean()
 median_tempo = tracks_df['tempo'].median()
 
-# Create a histogram using Plotly
+# Create a histogram of tempo distribution
 fig1 = px.histogram(
     tracks_df,
     x='tempo',
@@ -165,9 +162,9 @@ fig1.update_layout(
 fig1.add_vline(x=mean_tempo, line=dict(color='red', dash='dash'), annotation_text=f'Mean: {mean_tempo:.2f}', annotation_position='top right')
 fig1.add_vline(x=median_tempo, line=dict(color='#39FF14', dash='dash'), annotation_text=f'Median: {median_tempo:.2f}', annotation_position='top left')
 
-# Show the plot in Streamlit
+# Show the plot with custom theme
 st.plotly_chart(fig1,theme=None)
-
+# Annotations below plot
 st.write(f"**Mean Tempo:** {mean_tempo:.2f} BPM")
 st.write(f"**Median Tempo:** {median_tempo:.2f} BPM")
 
@@ -178,7 +175,7 @@ st.header('Speechiness vs. Instrumentalness')
 
 ''
 
-# Create a scatter plot using Plotly
+# Create a scatterplot showing the relationship between speechiness and instrumentalness with a linear regression line and reported slope and R-squared values
 m, b = np.polyfit(tracks_df['speechiness'], tracks_df['instrumentalness'], 1)
 tracks_df['y_pred'] = m * tracks_df['speechiness'] + b
 
@@ -223,7 +220,6 @@ fig2.update_layout(
     margin=dict(b=100)
 )
 
-# Show the plot in Streamlit
 st.plotly_chart(fig2,theme=None)
 
 
@@ -235,11 +231,11 @@ st.header(f'Stats', divider='gray')
 ''
 
 cols = st.columns(2)
-
+# Show the total number of records in the main table (i.e., how many times a song was listened to)
 with cols[0]:
     count = len(tracks_df)
     st.metric("Total Listens" , count, delta=None, help=None, label_visibility="visible")
-
+# Show the percentage of records set in minor key
 with cols[1]:
     major_count = tracks_df[tracks_df['mode'] == 0].shape[0]
     minor_count = tracks_df[tracks_df['mode'] == 1].shape[0]
@@ -249,7 +245,7 @@ with cols[1]:
         minor_pct = minor_count/count*100
         pct_str = f"{minor_pct:.1f}%"
     st.metric("Songs in Minor Key" , pct_str, delta=None, help=None, label_visibility="visible")
-
+# Show the artist with the highest number of records
 artist_counts = tracks_df['artists'].value_counts()
 top_artist = artist_counts.idxmax()
 
@@ -263,7 +259,7 @@ st.metric("Most Listened to", top_artist, delta=None, help=None, label_visibilit
 st.header(f'Top 10 Audio Features', divider='gray')
 
 ''
-
+# Plot a stacked barchart of the audio features of top 10 most listened to tracks
 af_df = summary_df[['track_name','danceability','energy','valence']]
 af_df.set_index('track_name', inplace=True)
 
