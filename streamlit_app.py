@@ -182,7 +182,7 @@ tracks_df['y_pred'] = m * tracks_df['speechiness'] + b
 r_squared = r2_score(tracks_df['instrumentalness'], tracks_df['y_pred'])
 
 
-fig2 = px.scatter(
+fig2 = px.density_heatmap(
     tracks_df,
     x='speechiness',
     y='instrumentalness',
@@ -192,7 +192,7 @@ fig2 = px.scatter(
     }
 )
 
-fig2.update_traces(marker=dict(opacity=0.5))
+# fig2.update_traces(marker=dict(opacity=0.5))
 
 fig2.add_traces(px.line(tracks_df, x='speechiness', y='y_pred').data) 
 
