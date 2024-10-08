@@ -49,7 +49,7 @@ st.markdown('''
     Spotify Insights
 </h1>
             
-<p>Welcome to my Spotify data pipeline project! See below the results from analyses of my personal listening history as of August 2024. This data was obtained through the Spotify Web API.</p>
+<p>Welcome to the Spotify data pipeline project! See below the results from analyses of my personal listening history as of August 2024. This data was obtained through the Spotify Web API.</p>
 ''', unsafe_allow_html=True)
 
 ''
